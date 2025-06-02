@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yan Ladeia Tortelli - Portfólio</title>
+  <link rel="shortcut icon" href="image.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -16,6 +17,9 @@
       --gray: #6c757d;
       --light-gray: #e9ecef;
       --success: #4cc9f0;
+      --frontend: #4361ee;
+      --backend: #4cc9f0;
+      --tools: #f72585;
       --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease;
     }
@@ -42,7 +46,7 @@
     
     /* Header */
     .header {
-      background: white;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(76, 201, 240, 0.05));
       border-radius: 16px;
       box-shadow: var(--box-shadow);
       padding: 30px;
@@ -78,7 +82,20 @@
     
     .header img:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+    }
+    
+    .profile-ring {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) 0% 75%, transparent 75% 100%);
+      z-index: 0;
+      animation: rotateRing 4s linear infinite;
     }
     
     h1 {
@@ -89,6 +106,7 @@
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(67, 97, 238, 0.5);
     }
     
     p.subtitle {
@@ -146,6 +164,7 @@
       width: 5px;
       height: 100%;
       background: linear-gradient(to bottom, var(--primary), var(--success));
+      animation: pulseBar 2s ease-in-out infinite;
     }
     
     h2 {
@@ -166,6 +185,11 @@
       height: 4px;
       background: linear-gradient(90deg, var(--primary), var(--success));
       border-radius: 2px;
+      transition: var(--transition);
+    }
+    
+    h2:hover::after {
+      width: 100px;
     }
     
     /* Projects */
@@ -187,9 +211,21 @@
     }
     
     .project:hover {
-      transform: translateY(-10px);
+      transform: translateY(-10px) perspective(1000px) rotateX(2deg);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
       border-color: var(--primary);
+    }
+    
+    .project-thumb {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px 12px 0 0;
+      transition: var(--transition);
+    }
+    
+    .project:hover .project-thumb {
+      filter: brightness(1.1);
     }
     
     .project-content {
@@ -234,6 +270,7 @@
     
     .project-links a:first-child:hover {
       background-color: var(--primary-dark);
+      box-shadow: 0 0 15px rgba(67, 97, 238, 0.6);
     }
     
     .project-links a:last-child {
@@ -245,6 +282,22 @@
       background-color: #dee2e6;
     }
     
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .project-tech span {
+      background: rgba(67, 97, 238, 0.2);
+      color: var(--dark);
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
     /* Tech List */
     .tech-list {
       display: flex;
@@ -254,14 +307,25 @@
     }
     
     .tech-list span {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
       padding: 8px 18px;
       border-radius: 50px;
       font-size: 0.9rem;
       font-weight: 500;
       transition: var(--transition);
       box-shadow: 0 4px 10px rgba(67, 97, 238, 0.2);
+      color: white;
+    }
+    
+    .tech-list span.frontend {
+      background: linear-gradient(135deg, var(--frontend), var(--primary-dark));
+    }
+    
+    .tech-list span.backend {
+      background: linear-gradient(135deg, var(--success), #3ab0d4);
+    }
+    
+    .tech-list span.tools {
+      background: linear-gradient(135deg, var(--tools), #b5179e);
     }
     
     .tech-list span:hover {
@@ -304,10 +368,16 @@
     }
     
     .about-card {
-      background: var(--light);
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
       padding: 25px;
       border-radius: 12px;
       border-left: 4px solid var(--primary);
+      transition: var(--transition);
+    }
+    
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
     }
     
     .about-card h3 {
@@ -345,6 +415,7 @@
     .badge:hover {
       background: var(--primary);
       color: white;
+      transform: scale(1.05);
     }
     
     .badge i {
@@ -366,11 +437,32 @@
       padding: 10px;
       background: rgba(67, 97, 238, 0.1);
       border-radius: 8px;
+      transition: var(--transition);
+    }
+    
+    .skill-item:hover {
+      transform: scale(1.05);
+      background: rgba(67, 97, 238, 0.2);
     }
     
     .skill-item i {
       color: var(--primary);
       font-size: 1.2rem;
+    }
+    
+    .skill-progress {
+      width: 100%;
+      height: 5px;
+      background: var(--light-gray);
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    
+    .skill-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 5px;
+      transition: width 1s ease;
     }
     
     /* Animations */
@@ -388,6 +480,17 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+    
+    @keyframes pulseBar {
+      0% { height: 100%; }
+      50% { height: 90%; }
+      100% { height: 100%; }
+    }
+    
+    @keyframes rotateRing {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
     }
     
     /* Responsive */
@@ -433,6 +536,12 @@
       .header img {
         width: 120px;
         height: 120px;
+      }
+      
+      .profile-ring {
+        width: 130px;
+        height: 130px;
+        top: 20px;
       }
       
       h1 {
@@ -491,12 +600,14 @@
     
     .footer a:hover {
       text-decoration: underline;
+      color: var(--primary-dark);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="header">
+      <div class="profile-ring"></div>
       <img src="yan.jpg" alt="Yan Ladeia Tortelli">
       <h1>Yan Ladeia Tortelli</h1>
       <p class="subtitle">Desenvolvedor Full Stack Júnior | Especialista em Bots e Soluções Web</p>
@@ -518,7 +629,7 @@
         
         <div class="about-card">
           <h3><i class="fas fa-heart"></i> Paixão por Programação</h3>
-          <p>Programação não é apenas meu trabalho, é minha paixão. Não há um dia sequer em que eu não escreva pelo menos uma linha de código. Acredito que a tecnologia tem o poder de transformar o mundo e me dedico a aprender cada vez mais. Adoro resolver problemas complexos e criar soluções elegantes.</p>
+          <p>Programação não é apenas meu trabalho, é minha paixão. Não há um dia sequer em que eu não escreva pelo menos uma linha de código. Acredito que a tecnologia tem o poder de transformar o mundo e me dedico a aprender cada vez mais. Adoro resolver problemas complexos e criar soluções.</p>
         </div>
         
         <div class="about-card">
@@ -530,6 +641,11 @@
           <h3><i class="fas fa-users"></i> Perfil Profissional</h3>
           <p>Sou naturalmente líder e gosto de motivar equipes para alcançar os melhores resultados. Minha abordagem combina pensamento estratégico com execução prática. Acredito na colaboração e no compartilhamento de conhecimento como pilares para o sucesso de qualquer projeto de tecnologia.</p>
         </div>
+        
+        <div class="about-card">
+          <h3><i class="fas fa-campground"></i> Experiência Escoteira</h3>
+          <p>Atuo no ramo escoteiro como Pioneiro, onde desenvolvi habilidades de liderança, autonomia, criatividade e tomada de decisão. Minha participação no movimento escoteiro fortaleceu meu compromisso com o trabalho em equipe, a responsabilidade e a resolução de desafios de forma inovadora.</p>
+        </div>
       </div>
     </section>
 
@@ -539,26 +655,32 @@
         <div class="skill-item">
           <i class="fas fa-bolt"></i>
           <span>Aprendizado Rápido</span>
+          <div class="skill-progress"><div class="skill-progress-bar" style="width: 90%;"></div></div>
         </div>
         <div class="skill-item">
           <i class="fas fa-robot"></i>
           <span>Especialista em IA</span>
+          <div class="skill-progress"><div class="skill-progress-bar" style="width: 85%;"></div></div>
         </div>
         <div class="skill-item">
           <i class="fas fa-project-diagram"></i>
           <span>Scrum Master</span>
+          <div class="skill-progress"><div class="skill-progress-bar" style="width: 80%;"></div></div>
         </div>
         <div class="skill-item">
           <i class="fas fa-pen-fancy"></i>
           <span>Figma Designer</span>
+          <div class="skill-progress"><div class="skill-progress-bar" style="width: 75%;"></div></div>
         </div>
         <div class="skill-item">
           <i class="fas fa-users"></i>
           <span>Trabalho em Equipe</span>
+          <div class="skill-progress"><div class="skill-progress-bar" style="width: 92%;"></div></div>
         </div>
         <div class="skill-item">
           <i class="fas fa-chess-king"></i>
           <span>Liderança</span>
+          <div class="skill-progress"><div class="skill-progress-bar" style="width: 88%;"></div></div>
         </div>
       </div>
     </section>
@@ -576,6 +698,7 @@
       <h2>Projetos</h2>
       <div class="projects-grid">
         <div class="project">
+          
           <div class="project-content">
             <strong>PascoaFeliz</strong>
             <p>Site temático de Páscoa com design interativo e responsivo, hospedado no GitHub Pages.</p>
@@ -583,10 +706,33 @@
               <a href="https://yanlt32.github.io/pascoafeliz/" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
               <a href="https://github.com/yanlt32/pascoafeliz" target="_blank"><i class="fab fa-github"></i> Código</a>
             </div>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>GitHub Pages</span>
+            </div>
           </div>
         </div>
-        
+
         <div class="project">
+         
+          <div class="project-content">
+            <strong>AeMundi</strong>
+            <p>Plataforma educacional para promover intercâmbios e projetos colaborativos, com seções para eventos, depoimentos e formulários de contato.</p>
+            <div class="project-links">
+              <a href="https://ae-mundi.vercel.app/" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+              <a href="https://github.com/yanlt32/AeMundi.git" target="_blank"><i class="fab fa-github"></i> Código</a>
+            </div>
+            <div class="project-tech">
+              <span>React</span>
+              <span>CSS3</span>
+              <span>Vercel</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project">
+          
           <div class="project-content">
             <strong>Bolo</strong>
             <p>Site de apresentação de bolos com galeria de imagens, hospedado no GitHub Pages.</p>
@@ -594,10 +740,16 @@
               <a href="https://yanlt32.github.io/bolo/" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
               <a href="https://github.com/yanlt32/bolo" target="_blank"><i class="fab fa-github"></i> Código</a>
             </div>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>GitHub Pages</span>
+            </div>
           </div>
         </div>
         
         <div class="project">
+          
           <div class="project-content">
             <strong>TecLove-teste</strong>
             <p>Site para casais com contagem de dias, envio de fotos, planos e suporte.</p>
@@ -605,20 +757,32 @@
               <a href="https://yanlt32.github.io/TecLove-teste/" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
               <a href="https://github.com/yanlt32/TecLove-teste" target="_blank"><i class="fab fa-github"></i> Código</a>
             </div>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>JavaScript</span>
+              <span>GitHub Pages</span>
+            </div>
           </div>
         </div>
         
         <div class="project">
+          
           <div class="project-content">
             <strong>Sistema de Candidaturas</strong>
             <p>Plataforma para upload de arquivos e envio de dados para bot do Telegram.</p>
             <div class="project-links">
               <a href="https://github.com/yanlt32/sistema-candidaturas" target="_blank"><i class="fab fa-github"></i> Código</a>
             </div>
+            <div class="project-tech">
+              <span>Node.js</span>
+              <span>Telegram Bot API</span>
+              <span>JavaScript</span>
+            </div>
           </div>
         </div>
         
         <div class="project">
+         
           <div class="project-content">
             <strong>Jogo de Cartas Tech</strong>
             <p>Jogo interativo "Sorte ou Azar" com temas de TI, desenvolvido em JavaScript.</p>
@@ -626,16 +790,27 @@
               <a href="https://yanlt32.github.io/gestaodeprojetos/" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
               <a href="https://github.com/yanlt32/gestaodeprojetos.git" target="_blank"><i class="fab fa-github"></i> Código</a>
             </div>
+            <div class="project-tech">
+              <span>JavaScript</span>
+              <span>HTML5</span>
+              <span>CSS3</span>
+            </div>
           </div>
         </div>
         
         <div class="project">
+          
           <div class="project-content">
             <strong>docedonna</strong>
             <p>Site de apresentação de produtos para minha namorada.</p>
             <div class="project-links">
               <a href="https://yanlt32.github.io/docedonna/" target="_blank"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
               <a href="https://github.com/yanlt32/docedonna.git" target="_blank"><i class="fab fa-github"></i> Código</a>
+            </div>
+            <div class="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>GitHub Pages</span>
             </div>
           </div>
         </div>
@@ -645,26 +820,26 @@
     <section class="section">
       <h2>Tecnologias</h2>
       <div class="tech-list">
-        <span>Node.js</span>
-        <span>Express</span>
-        <span>JavaScript</span>
-        <span>React</span>
-        <span>React Native</span>
-        <span>Expo</span>
-        <span>SQLite</span>
-        <span>HTML5</span>
-        <span>CSS3</span>
-        <span>Telegram Bot API</span>
-        <span>WhatsApp Web API</span>
-        <span>Django</span>
-        <span>PM2</span>
-        <span>AWS</span>
-        <span>Render</span>
-        <span>Git/GitHub</span>
-        <span>GitHub Pages</span>
-        <span>Scrum</span>
-        <span>Figma</span>
-        <span>IA Tools</span>
+        <span class="backend">Node.js</span>
+        <span class="backend">Express</span>
+        <span class="frontend">JavaScript</span>
+        <span class="frontend">React</span>
+        <span class="frontend">React Native</span>
+        <span class="tools">Expo</span>
+        <span class="backend">SQLite</span>
+        <span class="frontend">HTML5</span>
+        <span class="frontend">CSS3</span>
+        <span class="backend">Telegram Bot API</span>
+        <span class="backend">WhatsApp Web API</span>
+        <span class="backend">Django</span>
+        <span class="tools">PM2</span>
+        <span class="tools">AWS</span>
+        <span class="tools">Render</span>
+        <span class="tools">Git/GitHub</span>
+        <span class="tools">GitHub Pages</span>
+        <span class="tools">Scrum</span>
+        <span class="tools">Figma</span>
+        <span class="tools">IA Tools</span>
       </div>
     </section>
 
@@ -682,14 +857,14 @@
       <ul class="custom-list">
         <li>Microsoft Power Platform Fundamentals</li>
         <li>Google Cloud Associate Cloud Engineer</li>
-        <li>AWS Certified Cloud practitioner</li>
+        <li>AWS Certified Cloud Practitioner</li>
         <li>Cisco Certified Technician (CCT)</li>
         <li>Curso de TI e Manutenção de Celulares – Mega Top</li>
       </ul>
     </section>
 
     <footer class="footer">
-      <p>© 2023 Yan Ladeia Tortelli. Todos os direitos reservados.</p>
+      <p>© 2025 Yan Ladeia Tortelli. Todos os direitos reservados.</p>
       <p>Desenvolvido com <i class="fas fa-heart" style="color: #e74c3c;"></i> por <a href="https://github.com/yanlt32" target="_blank">Yan Tortelli</a></p>
     </footer>
   </div>
